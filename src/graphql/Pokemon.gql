@@ -1,0 +1,126 @@
+query Pokemons(
+	$limit: Int
+	$offset: Int
+	$where: pokemon_v2_pokemon_bool_exp
+	$orderBy: [pokemon_v2_pokemon_order_by!]
+) {
+	pokemons: pokemon_v2_pokemon(
+		limit: $limit
+		offset: $offset
+		where: $where
+		order_by: $orderBy
+	) {
+		id
+		name
+		types: pokemon_v2_pokemontypes {
+			id
+			type: pokemon_v2_type {
+				id
+				name
+			}
+		}
+		sprites: pokemon_v2_pokemonsprites {
+			id
+			sprites
+		}
+	}
+}
+
+query Pokemon($id: Int!) {
+	pokemon: pokemon_v2_pokemon_by_pk(id: $id) {
+		id
+		name
+		height
+		weight
+
+		sprites: pokemon_v2_pokemonsprites {
+			id
+			sprites
+		}
+
+		types: pokemon_v2_pokemontypes {
+			id
+			type: pokemon_v2_type {
+				id
+				name
+			}
+		}
+
+		stats: pokemon_v2_pokemonstats {
+			id
+			base: base_stat
+			stat: pokemon_v2_stat {
+				id
+				name
+			}
+		}
+
+		moves: pokemon_v2_pokemonmoves(
+			where: { pokemon_v2_move: { power: { _gt: 0 } } }
+			distinct_on: move_id
+		) {
+			id
+			move: pokemon_v2_move {
+				id
+				pp
+				name
+				power
+				accuracy
+				effects: pokemon_v2_moveeffect {
+					id
+					effectTexts: pokemon_v2_moveeffecteffecttexts {
+						id
+						effect
+					}
+				}
+			}
+		}
+
+		specy: pokemon_v2_pokemonspecy {
+			id
+			genderRate: gender_rate
+			hatchCounter: hatch_counter
+			eggroups: pokemon_v2_pokemonegggroups {
+				id
+				egggroup: pokemon_v2_egggroup {
+					id
+					name
+				}
+			}
+			evolutionChain: pokemon_v2_evolutionchain {
+				id
+				species: pokemon_v2_pokemonspecies {
+					id
+					name
+					evolvesFrom: evolves_from_species_id
+					evolutions: pokemon_v2_pokemonevolutions {
+						id
+						minLevel: min_level
+					}
+				}
+			}
+			flavorTexts: pokemon_v2_pokemonspeciesflavortexts(
+				distinct_on: language_id
+				where: { pokemon_v2_language: { name: { _eq: "en" } } }
+			) {
+				id
+				flavorText: flavor_text
+			}
+		}
+
+		abilities: pokemon_v2_pokemonabilities {
+			id
+			ability: pokemon_v2_ability {
+				id
+				name
+			}
+		}
+	}
+}
+
+query PokemonSprites($id: Int!) {
+	sprites: pokemon_v2_pokemonsprites(where: { pokemon_id: { _eq: $id } }) {
+		id
+		sprite: sprites
+	}
+}
