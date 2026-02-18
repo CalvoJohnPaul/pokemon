@@ -2,6 +2,7 @@ import {Progress} from '@/components/Progress';
 import {getPokemon, getPokemonResistanceAndWeakness} from '@/services/Pokemon';
 import {Box, styled, VStack} from '@/styled-system/jsx';
 import {capitalize} from '@/utils/capitalize';
+import {clamp} from 'es-toolkit';
 import {notFound} from 'next/navigation';
 
 export default async function Statistics(props: {params: Promise<{id: string}>}) {
@@ -29,7 +30,7 @@ export default async function Statistics(props: {params: Promise<{id: string}>})
 					if (!obj.stat) return null;
 
 					return (
-						<Progress.Root key={obj.id} value={obj.base} min={0} max={100}>
+						<Progress.Root key={obj.id} value={clamp(obj.base, 0, 100)} min={0} max={100}>
 							<Progress.Track>
 								<Progress.Range />
 							</Progress.Track>
