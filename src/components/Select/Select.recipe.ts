@@ -43,6 +43,9 @@ export const selectRecipe = sva({
 		},
 		itemIndicator: {
 			color: 'neutral.400',
+			_checked: {
+				color: 'green.500',
+			},
 		},
 		itemText: {
 			flexGrow: 1,

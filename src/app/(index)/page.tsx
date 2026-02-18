@@ -199,13 +199,8 @@ async function Filter(props: GetPokemonsInput) {
 				/>
 			</Field.Root>
 			<TypeFilter defaultValue={props.type} />
-			<Button
-				type="submit"
-				w={{base: 'calc(25% - 0.75rem)', lg: 'auto'}}
-				ml={{base: 3, lg: 0}}
-				flexShrink={0}
-			>
-				<Icon w={6} h={6} color="neutral.400" asChild>
+			<Button type="submit" variant="solid" ml={{base: 3, lg: 0}} flexShrink={0}>
+				<Icon w={6} h={6} asChild>
 					<SearchIcon />
 				</Icon>
 				<VisuallyHidden>Search</VisuallyHidden>
@@ -240,10 +235,10 @@ const GetPokemonsInputDefinition = z
 			.optional()
 			.nullable()
 			.transform((v) => {
-				if (v == null) return 12;
+				if (v == null) return 24;
 				const n = Number.parseInt(v);
-				if (Number.isNaN(v)) return 12;
-				if (n < 12 || n > 12 * 5) return 12;
+				if (Number.isNaN(v)) return 24;
+				if (n < 24 || n > 24 * 5) return 24;
 				return n;
 			}),
 		search: z

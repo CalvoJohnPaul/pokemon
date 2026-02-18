@@ -4,7 +4,6 @@ import {styled} from '@/styled-system/jsx';
 import type {Metadata} from 'next';
 import {Fira_Code, Lato} from 'next/font/google';
 import type {PropsWithChildren} from 'react';
-import {Navbar} from './Navbar';
 
 const sans = Lato({
 	style: ['normal', 'italic'],
@@ -51,7 +50,6 @@ export default function Layout({children}: PropsWithChildren) {
 			scrollBehavior="smooth"
 		>
 			<styled.body bg="neutral.900" color="neutral.100" fontFamily="sans" minH="dvh">
-				<Navbar />
 				<styled.main
 					maxW="breakpoint-xl"
 					mx="auto"

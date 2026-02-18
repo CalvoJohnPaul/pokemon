@@ -3,7 +3,6 @@ import {cva} from '@/styled-system/css';
 export const buttonRecipe = cva({
 	base: {
 		h: 14,
-		bg: 'neutral.800',
 		minW: 14,
 		cursor: 'pointer',
 		display: 'flex',
@@ -17,5 +16,19 @@ export const buttonRecipe = cva({
 		_active: {
 			transform: 'scale(0.95)',
 		},
+	},
+	variants: {
+		variant: {
+			ghost: {
+				bg: 'neutral.800',
+			},
+			solid: {
+				bg: 'orange.500',
+				color: 'text-white',
+			},
+		},
+	},
+	defaultVariants: {
+		variant: 'ghost',
 	},
 });

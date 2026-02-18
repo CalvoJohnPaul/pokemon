@@ -40,6 +40,10 @@ export function TypeFilter(props: TypeFilterProps) {
 				lg: '18rem',
 			}}
 			flexShrink={0}
+			flexGrow={{
+				base: 1,
+				lg: 0,
+			}}
 			name="type"
 			value={value}
 			onValueChange={(details) => {
